@@ -219,6 +219,26 @@ body {
   object-fit: contain;
 }
 
+.image-zoom-trigger {
+  display: block;
+  cursor: zoom-in;
+}
+
+.image-zoom-trigger:focus-visible {
+  outline: 3px solid rgba(15, 79, 175, 0.25);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.structure-modal-content {
+  background: transparent;
+}
+
+.structure-modal-image {
+  max-height: 85vh;
+  object-fit: contain;
+}
+
 .process-list {
   padding-top: 0.25rem;
 }
