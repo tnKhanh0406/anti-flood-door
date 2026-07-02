@@ -103,76 +103,39 @@
   <script src="layout.js"></script>
 </body>
 <script>
-  const API_URL =
-  "https://script.google.com/macros/s/AKfycbybYezJl6kBCN2fb97CuDc5FdNbn-do9mGCDug7mXVaHRItqzPaM6bpv0Rmj7oAhp9A/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbybYezJl6kBCN2fb97CuDc5FdNbn-do9mGCDug7mXVaHRItqzPaM6bpv0Rmj7oAhp9A/exec";
 
-  const form =
-  document.getElementById("contactForm");
+  const form = document.getElementById("contactForm");
 
-  form.addEventListener(
-  "submit",
-  async function (e) {
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      e.preventDefault();
+    // Sử dụng URLSearchParams thay cho FormData để mã hóa dữ liệu dạng application/x-www-form-urlencoded
+    const searchParams = new URLSearchParams();
+    searchParams.append("fullName", form.fullName.value.trim());
+    searchParams.append("email", form.email.value.trim());
+    searchParams.append("phone", form.phone.value.trim());
+    searchParams.append("message", form.message.value.trim());
 
-      const formData =
-          new FormData();
+    try {
+      // Thực hiện fetch với chế độ no-cors
+      await fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors", // Bỏ qua rào cản CORS của trình duyệt đối với Google Redirect
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: searchParams.toString()
+      });
 
-      formData.append(
-          "fullName",
-          form.fullName.value.trim()
-      );
+      // Vì dùng no-cors nên không đọc response.json(), mặc định request thành công nếu không bị catch lỗi mạng
+      alert("Gửi thành công!");
+      form.reset();
 
-      formData.append(
-          "email",
-          form.email.value.trim()
-      );
-
-      formData.append(
-          "phone",
-          form.phone.value.trim()
-      );
-
-      formData.append(
-          "message",
-          form.message.value.trim()
-      );
-
-      try {
-
-          const response =
-              await fetch(API_URL, {
-
-                  method: "POST",
-
-                  body: formData
-
-              });
-
-          const result =
-              await response.json();
-
-          if(result.success){
-
-              alert(
-                  "Gửi thành công"
-              );
-
-              form.reset();
-
-          }
-
-      }
-      catch(err){
-
-          console.log(err);
-
-          alert(
-              "Không gửi được"
-          );
-
-      }
-
+    } catch (err) {
+      console.error(err);
+      alert("Không gửi được dữ liệu, vui lòng thử lại sau.");
+    }
   });
 </script>
 </html>
