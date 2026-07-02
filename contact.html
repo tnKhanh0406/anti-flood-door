@@ -86,6 +86,9 @@
                 <div class="col-12">
                   <textarea class="form-control form-control-lg" name="message" rows="6" placeholder="Nội dung yêu cầu"></textarea>
                 </div>
+                <div style="display:none;">
+                  <input type="text" name="honeypot" id="honeypot" autocomplete="off">
+                </div>
                 <div class="col-12 text-center pt-2">
                   <button type="submit" class="btn btn-primary btn-lg rounded-0 px-5 fw-bold contact-form__submit">GỬI YÊU CẦU</button>
                 </div>
@@ -103,7 +106,7 @@
   <script src="layout.js"></script>
 </body>
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbybYezJl6kBCN2fb97CuDc5FdNbn-do9mGCDug7mXVaHRItqzPaM6bpv0Rmj7oAhp9A/exec";
+  const API_URL = "https://script.google.com/macros/s/AKfycbyHNhuDxmy8XoR27ATQTbGXNQn7-LeUddSYxgg_1Krme_5j2fIwI_ELeviJ4iqnDWmf/exec";
 
   const form = document.getElementById("contactForm");
 
@@ -116,6 +119,7 @@
     searchParams.append("email", form.email.value.trim());
     searchParams.append("phone", form.phone.value.trim());
     searchParams.append("message", form.message.value.trim());
+    searchParams.append("honeypot", form.honeypot.value.trim());
 
     try {
       // Thực hiện fetch với chế độ no-cors
