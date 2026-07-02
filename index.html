@@ -12,42 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
-<body class="bg-white text-dark">
+<body class="bg-white text-dark" data-page="home">
   <div class="page-shell">
-    <div class="topbar py-2 py-md-3 text-white small">
-      <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 text-center text-md-start">
-        <p class="mb-0">Giải pháp bảo vệ ngôi nhà của bạn trước những trận mưa lớn</p>
-        <a class="d-inline-flex align-items-center gap-2 fw-semibold text-white text-decoration-none" href="tel:0948723379">
-          <span class="topbar__icon"><i class="bi bi-telephone-fill"></i></span>
-          Tư vấn &amp; báo giá: 0948 723 379
-        </a>
-      </div>
-    </div>
-
-    <nav class="navbar navbar-expand-lg bg-white py-2 py-lg-3 shadow-sm sticky-top">
-      <div class="container">
-        <a class="navbar-brand p-0" href="#home" aria-label="NGUYỄN PHÚ trang chủ">
-          <img src="assets/images/logo.png" alt="NGUYỄN PHÚ" class="brand__logo">
-        </a>
-
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Mở menu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-lg-4 align-items-lg-center fw-semibold">
-            <li class="nav-item"><a class="nav-link text-dark" href="#home">Trang chủ</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="#products">Sản phẩm</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="#projects">Công trình</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="#contact">Liên hệ</a></li>
-          </ul>
-
-          <a class="btn btn-primary rounded-pill px-4 py-3 fw-semibold ms-lg-3" href="tel:0948723379">
-            <i class="bi bi-telephone-fill me-2"></i>Gọi tư vấn ngay
-          </a>
-        </div>
-      </div>
-    </nav>
+    <div data-layout="header"></div>
 
     <main class="hero-section py-4 py-lg-5" id="home">
       <div class="container">
@@ -94,7 +61,7 @@
                   </a>
                 </div>
                 <div class="col-12 col-md-6">
-                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-3 py-3 fw-semibold w-100" href="#contact">
+                  <a class="btn btn-outline-secondary btn-lg rounded-pill px-3 py-3 fw-semibold w-100" href="contact.html#contact-info">
                   <i class="bi bi-arrow-up-right-square me-2"></i>Gửi kích thước để báo giá
                   </a>
                 </div>
@@ -377,7 +344,7 @@
                 </div>
               </div>
 
-              <a class="btn btn-accent btn-lg rounded-pill px-4 py-3 fw-semibold text-white pricing-section__cta" href="#contact">
+              <a class="btn btn-accent btn-lg rounded-pill px-4 py-3 fw-semibold text-white pricing-section__cta" href="contact.html#contact-info">
                 GỬI ẢNH VÀ KÍCH THƯỚC QUA ZALO
                 <i class="bi bi-zalo ms-2"></i>
               </a>
@@ -486,7 +453,7 @@
                     </li>
                   </ul>
 
-                  <a class="video-guide__link" href="#contact">
+                  <a class="video-guide__link" href="contact.html#contact-info">
                     <i class="bi bi-play-btn-fill"></i>
                     <span>Xem video hướng dẫn</span>
                   </a>
@@ -588,7 +555,7 @@
 
             <div class="col-12 col-md-auto">
               <div class="d-flex justify-content-center">
-                <a class="cta-banner__card text-decoration-none" href="#contact">
+                <a class="cta-banner__card text-decoration-none" href="contact.html#contact-info">
                 <span class="cta-banner__zalo">Zalo</span>
                 <span class="cta-banner__card-text text-start">
                   <span class="cta-banner__card-top">Chat Zalo ngay</span>
@@ -600,7 +567,7 @@
 
             <div class="col-12 col-md-auto">
               <div class="d-flex justify-content-center">
-                <a class="cta-banner__card text-decoration-none" href="#contact">
+                <a class="cta-banner__card text-decoration-none" href="contact.html#contact-info">
                 <span class="cta-banner__icon"><i class="bi bi-arrow-up-right-square"></i></span>
                 <span class="cta-banner__card-text text-start">
                   <span class="cta-banner__card-top">Gửi ảnh và kích thước</span>
@@ -614,54 +581,7 @@
       </div>
     </section>
 
-    <footer class="site-footer py-5">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-12 col-md-6 col-lg-3">
-            <a class="site-footer__brand d-inline-flex align-items-center mb-3" href="#home" aria-label="NGUYỄN PHÚ trang chủ">
-              <img src="assets/images/logo.png" alt="NGUYỄN PHÚ" class="site-footer__logo">
-            </a>
-            <p class="site-footer__text mb-4">
-              Giải pháp cửa chống ngập panel nhôm ghép thanh cơ hiệu quả, bền bỉ, thẩm mĩ cao
-            </p>
-            <div class="site-footer__socials d-flex gap-2">
-              <a class="site-footer__social" href="https://www.facebook.com/profile.php?id=61582512945913" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a class="site-footer__social" href="https://www.tiktok.com/@chongngapnguyenphu1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-              <a class="site-footer__social site-footer__social--zalo" href="https://zalo.me/0948723379" aria-label="Zalo">Zalo</a>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-4">
-            <h4 class="site-footer__title">Liên hệ</h4>
-            <ul class="site-footer__list list-unstyled mb-0">
-              <li><a href="tel:0948723379">Số điện thoại: 0948 723 379</a></li>
-              <li><a href="mailto:nguyenphu@example.com">Email: chongngapnguyenphu@gmail.com</a></li>
-              <li><a href="#contact">Địa chỉ Hà nội: 123 Đường ABC, Quận XYZ, Hà Nội</a></li>
-              <li><a href="#contact">Địa chỉ TP HCM: 456 Đường DEF, Quận GHI, TP HCM</a></li>
-            </ul>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-3">
-            <h4 class="site-footer__title">Chính sách</h4>
-            <ul class="site-footer__list list-unstyled mb-0">
-              <li><a href="#contact">Chính sách bảo hành</a></li>
-              <li><a href="#contact">Chính sách đổi trả</a></li>
-              <li><a href="#contact">Chính sách vận chuyển</a></li>
-              <li><a href="#contact">Chính sách thanh toán</a></li>
-            </ul>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-2">
-            <h4 class="site-footer__title">Kết nối với chúng tôi</h4>
-            <div class="site-footer__social-grid d-flex gap-3 flex-wrap">
-              <a class="site-footer__social site-footer__social--square" href="https://www.facebook.com/profile.php?id=61582512945913" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a class="site-footer__social site-footer__social--square" href="https://www.tiktok.com/@chongngapnguyenphu1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-              <a class="site-footer__social site-footer__social--square site-footer__social--zalo" href="https://zalo.me/0948723379" aria-label="Zalo">Zalo</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <div data-layout="footer"></div>
   </div>
 
   <div class="modal fade" id="imageZoomModal" tabindex="-1" aria-labelledby="imageZoomModalLabel" aria-hidden="true">
@@ -680,6 +600,7 @@
 
   <script async src="https://www.tiktok.com/embed.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="layout.js"></script>
   <script>
     const imageZoomModal = document.getElementById('imageZoomModal');
     const imageZoomModalImg = document.getElementById('imageZoomModalImg');

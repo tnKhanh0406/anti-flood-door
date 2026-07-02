@@ -101,6 +101,10 @@ body {
   transform: scaleX(1);
 }
 
+.navbar .nav-link.active::after {
+  transform: scaleX(1);
+}
+
 .hero-section {
   position: relative;
   background:
@@ -453,6 +457,112 @@ body {
 
 .video-faq-item span {
   min-width: 0;
+}
+
+.contact-page {
+  background:
+    radial-gradient(circle at top right, rgba(15, 79, 175, 0.08), transparent 28%),
+    linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
+}
+
+.contact-page__title {
+  color: #111827;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.contact-page__subtitle {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+}
+
+.contact-card,
+.contact-form-panel {
+  border: 1px solid rgba(15, 79, 175, 0.08);
+  background: #ffffff;
+}
+
+.contact-card__text {
+  color: #111827;
+  line-height: 1.55;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  color: #111827;
+}
+
+.contact-info-item__icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef3ff;
+  color: var(--primary-dark);
+  font-size: 1.05rem;
+}
+
+.contact-info-item__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact-info-item__label {
+  font-weight: 700;
+}
+
+.contact-info-item__value {
+  color: #111827;
+  font-weight: 600;
+}
+
+.contact-map {
+  min-height: 320px;
+  background: #eef2ff;
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+}
+
+.contact-form-panel__title {
+  color: #111827;
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.contact-form .form-control,
+.contact-form .form-select {
+  border-radius: 0;
+  border-color: rgba(17, 24, 39, 0.12);
+  box-shadow: none;
+  min-height: 54px;
+}
+
+.contact-form textarea.form-control {
+  min-height: 180px;
+}
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+  border-color: rgba(15, 79, 175, 0.4);
+  box-shadow: 0 0 0 0.2rem rgba(15, 79, 175, 0.12);
+}
+
+.contact-form__submit {
+  min-width: 180px;
 }
 
 .cta-banner {

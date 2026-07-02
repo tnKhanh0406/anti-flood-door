@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Liên hệ NGUYÊN PHÚ để được tư vấn cửa chống ngập panel nhôm ghép thanh cơ.">
+  <title>Liên hệ - NGUYÊN PHÚ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-white text-dark" data-page="contact">
+  <div class="page-shell">
+    <div data-layout="header"></div>
+
+    <main class="contact-page py-5" id="contact-info">
+      <div class="container">
+        <div class="text-center mb-4 mb-lg-5">
+          <h1 class="contact-page__title mb-2">LIÊN HỆ</h1>
+          <p class="contact-page__subtitle mb-0">Gửi thông tin hoặc gọi trực tiếp để được tư vấn nhanh nhất</p>
+        </div>
+
+        <div class="row g-4 g-xl-5 align-items-start">
+          <div class="col-lg-5">
+            <div class="contact-card h-100 rounded-4 p-4 p-xl-5 shadow-sm bg-white">
+              <p class="contact-card__text mb-4">
+                Cảm ơn quý khách đã tin tưởng &amp; sử dụng sản phẩm – dịch vụ của công ty chúng tôi.
+                Mọi yêu cầu tư vấn hay thắc mắc về sản phẩm – dịch vụ vui lòng điền thông tin vào mẫu &amp;
+                công ty chúng tôi sẽ liên hệ lại với quý khách hàng sớm nhất.
+              </p>
+
+              <div class="contact-info-list d-grid gap-3 mb-4">
+                <a class="contact-info-item text-decoration-none" href="tel:0948723379">
+                  <span class="contact-info-item__icon"><i class="bi bi-telephone-fill"></i></span>
+                  <span class="contact-info-item__text">
+                    <span class="contact-info-item__label">Mr Duy:</span>
+                    <span class="contact-info-item__value">0948 723 379</span>
+                  </span>
+                </a>
+
+                <a class="contact-info-item text-decoration-none" href="mailto:chongngapnguyenphu@gmail.com">
+                  <span class="contact-info-item__icon"><i class="bi bi-envelope-fill"></i></span>
+                  <span class="contact-info-item__text">
+                    <span class="contact-info-item__label">Email</span>
+                    <span class="contact-info-item__value">chongngapnguyenphu@gmail.com</span>
+                  </span>
+                </a>
+
+                <div class="contact-info-item">
+                  <span class="contact-info-item__icon"><i class="bi bi-geo-alt-fill"></i></span>
+                  <span class="contact-info-item__text">
+                    <span class="contact-info-item__label">Địa chỉ</span>
+                    <span class="contact-info-item__value">Số 123 Đường ABC, Quận XYZ, Hà Nội</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="contact-map rounded-4 overflow-hidden shadow-sm">
+                <iframe
+                  title="Bản đồ liên hệ"
+                  src="https://www.google.com/maps?q=H%C3%A0%20N%E1%BB%99i&z=15&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="contact-form-panel rounded-4 p-4 p-xl-5 shadow-sm bg-white">
+              <h2 class="contact-form-panel__title text-center mb-4">LIÊN HỆ NGAY</h2>
+              <form class="contact-form row g-3" action="#" method="post" id="contactForm">
+                <div class="col-12">
+                  <input type="text" class="form-control form-control-lg" name="fullName" placeholder="Họ và tên">
+                </div>
+                <div class="col-12">
+                  <input type="email" class="form-control form-control-lg" name="email" placeholder="Địa chỉ email">
+                </div>
+                <div class="col-12">
+                  <input type="tel" class="form-control form-control-lg" name="phone" placeholder="Số điện thoại">
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control form-control-lg" name="message" rows="6" placeholder="Nội dung yêu cầu"></textarea>
+                </div>
+                <div class="col-12 text-center pt-2">
+                  <button type="submit" class="btn btn-primary btn-lg rounded-0 px-5 fw-bold contact-form__submit">GỬI YÊU CẦU</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div data-layout="footer"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="layout.js"></script>
+</body>
+<script>
+  const API_URL =
+  "https://script.google.com/macros/s/AKfycbybYezJl6kBCN2fb97CuDc5FdNbn-do9mGCDug7mXVaHRItqzPaM6bpv0Rmj7oAhp9A/exec";
+
+  const form =
+  document.getElementById("contactForm");
+
+  form.addEventListener(
+  "submit",
+  async function (e) {
+
+      e.preventDefault();
+
+      const formData =
+          new FormData();
+
+      formData.append(
+          "fullName",
+          form.fullName.value.trim()
+      );
+
+      formData.append(
+          "email",
+          form.email.value.trim()
+      );
+
+      formData.append(
+          "phone",
+          form.phone.value.trim()
+      );
+
+      formData.append(
+          "message",
+          form.message.value.trim()
+      );
+
+      try {
+
+          const response =
+              await fetch(API_URL, {
+
+                  method: "POST",
+
+                  body: formData
+
+              });
+
+          const result =
+              await response.json();
+
+          if(result.success){
+
+              alert(
+                  "Gửi thành công"
+              );
+
+              form.reset();
+
+          }
+
+      }
+      catch(err){
+
+          console.log(err);
+
+          alert(
+              "Không gửi được"
+          );
+
+      }
+
+  });
+</script>
+</html>
