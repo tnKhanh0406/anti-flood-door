@@ -7,12 +7,15 @@
   }
 
   const currentPage = document.body?.dataset.page || 'home';
+  const isHomePage = currentPage === 'home';
   const isContactPage = currentPage === 'contact';
+  const isPostsPage = currentPage === 'posts' || currentPage === 'post-detail';
 
-  const logoHref = isContactPage ? 'index.html' : '#home';
-  const homeHref = isContactPage ? 'index.html#home' : '#home';
-  const productsHref = isContactPage ? 'index.html#products' : '#products';
-  const projectsHref = isContactPage ? 'index.html#projects' : '#projects';
+  const logoHref = isHomePage ? '#home' : 'index.html';
+  const homeHref = isHomePage ? '#home' : 'index.html#home';
+  const productsHref = isHomePage ? '#products' : 'index.html#products';
+  const projectsHref = isHomePage ? '#projects' : 'index.html#projects';
+  const postsHref = 'posts.html';
   const contactHref = isContactPage ? '#contact-info' : 'contact.html#contact-info';
   const footerContactHref = isContactPage ? '#contact-info' : 'contact.html#contact-info';
 
@@ -42,7 +45,7 @@
             <ul class="navbar-nav mx-auto mb-3 mb-lg-0 gap-lg-4 align-items-lg-center fw-semibold">
               <li class="nav-item"><a class="nav-link text-dark ${currentPage === 'home' ? 'active' : ''}" href="${homeHref}">Trang chủ</a></li>
               <li class="nav-item"><a class="nav-link text-dark" href="${productsHref}">Sản phẩm</a></li>
-              <li class="nav-item"><a class="nav-link text-dark" href="${projectsHref}">Công trình</a></li>
+              <li class="nav-item"><a class="nav-link text-dark ${isPostsPage ? 'active' : ''}" href="${postsHref}">Công trình</a></li>
               <li class="nav-item"><a class="nav-link text-dark ${currentPage === 'contact' ? 'active' : ''}" href="${contactHref}">Liên hệ</a></li>
             </ul>
 
