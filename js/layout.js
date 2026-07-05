@@ -8,11 +8,13 @@
 
   const currentPage = document.body?.dataset.page || 'home';
   const isContactPage = currentPage === 'contact';
+  const isPostsPage = currentPage === 'posts';
 
   const logoHref = isContactPage ? 'index.html' : '#home';
   const homeHref = isContactPage ? 'index.html#home' : '#home';
   const productsHref = isContactPage ? 'index.html#products' : '#products';
   const projectsHref = isContactPage ? 'index.html#projects' : '#projects';
+  const postsHref = isContactPage ? 'posts.html' : 'posts.html';
   const contactHref = isContactPage ? '#contact-info' : 'contact.html#contact-info';
   const footerContactHref = isContactPage ? '#contact-info' : 'contact.html#contact-info';
 
@@ -43,6 +45,7 @@
               <li class="nav-item"><a class="nav-link text-dark ${currentPage === 'home' ? 'active' : ''}" href="${homeHref}">Trang chủ</a></li>
               <li class="nav-item"><a class="nav-link text-dark" href="${productsHref}">Sản phẩm</a></li>
               <li class="nav-item"><a class="nav-link text-dark" href="${projectsHref}">Công trình</a></li>
+              <li class="nav-item"><a class="nav-link text-dark ${isPostsPage ? 'active' : ''}" href="${postsHref}">Bài viết</a></li>
               <li class="nav-item"><a class="nav-link text-dark ${currentPage === 'contact' ? 'active' : ''}" href="${contactHref}">Liên hệ</a></li>
             </ul>
 
