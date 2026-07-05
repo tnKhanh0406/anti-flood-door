@@ -21,6 +21,7 @@ if (!slug) {
     .from('posts')
     .select('title, slug, summary, content_html, thumbnail_url, created_at')
     .eq('slug', slug)
+    .eq('status', 'published')
     .maybeSingle();
 
   if (error || !data) {

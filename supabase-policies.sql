@@ -24,6 +24,13 @@ create table if not exists profiles (
 alter table posts enable row level security;
 alter table profiles enable row level security;
 
+grant usage on schema public to anon, authenticated;
+
+grant select on public.posts to anon, authenticated;
+grant insert, update, delete on public.posts to authenticated;
+
+grant select, update on public.profiles to authenticated;
+
 drop policy if exists "Allow public read access to posts" on posts;
 create policy "Allow public read access to posts"
 on posts for select
@@ -68,10 +75,12 @@ using (
 drop policy if exists "Allow users to read own profile" on profiles;
 create policy "Allow users to read own profile"
 on profiles for select
+to authenticated
 using (auth.uid() = id);
 
 drop policy if exists "Allow users to update own profile" on profiles;
 create policy "Allow users to update own profile"
 on profiles for update
+to authenticated
 using (auth.uid() = id)
 with check (auth.uid() = id);

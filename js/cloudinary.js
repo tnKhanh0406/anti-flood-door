@@ -1,7 +1,8 @@
-const CLOUDINARY_CLOUD_NAME = 'xxx';
-const CLOUDINARY_UPLOAD_PRESET = 'anti-flood';
+export const CLOUDINARY_CLOUD_NAME = 'dlm5gmhxs';
+export const CLOUDINARY_UPLOAD_PRESET = 'juau6dmj';
+export const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
-export async function uploadImage(file) {
+export async function uploadImage(file, options = {}) {
   if (!file) {
     return '';
   }
@@ -10,9 +11,10 @@ export async function uploadImage(file) {
   formData.append('file', file);
   formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-  const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+  const response = await fetch(CLOUDINARY_UPLOAD_URL, {
     method: 'POST',
     body: formData,
+    signal: options.signal,
   });
 
   if (!response.ok) {

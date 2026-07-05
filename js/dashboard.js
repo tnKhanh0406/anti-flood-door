@@ -98,7 +98,7 @@ if (dashboardRoot) {
             <td>${formatDate(post.updated_at)}</td>
             <td class="text-end">
               <div class="btn-group btn-group-sm">
-                <a class="btn btn-outline-primary" href="create-post.html?edit=${encodeURIComponent(post.id)}">Sửa</a>
+                <a class="btn btn-outline-primary" href="edit-post.html?id=${encodeURIComponent(post.id)}">Sửa</a>
                 <button class="btn btn-outline-danger" type="button" data-delete-post="${escapeHtml(post.id)}">Xoá</button>
               </div>
             </td>

@@ -10,6 +10,8 @@ if (formRoot) {
   const thumbnailInput = document.getElementById('thumbnail');
   const slugInput = document.getElementById('slug');
   const titleInput = document.getElementById('title');
+  const contentInput = document.getElementById('content_html');
+  let contentEditor = null;
 
   const slugify = (value) =>
     value
@@ -38,13 +40,18 @@ if (formRoot) {
       return null;
     }
 
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, is_active')
       .eq('id', data.user.id)
       .maybeSingle();
 
-    if (!profile || profile.role !== 'admin') {
+    if (profileError) {
+      setStatus(`Không thể kiểm tra quyền admin: ${profileError.message}`, 'danger');
+      return null;
+    }
+
+    if (!profile || profile.role !== 'admin' || profile.is_active === false) {
       await supabase.auth.signOut();
       location.href = 'login.html';
       return null;
@@ -53,11 +60,83 @@ if (formRoot) {
     return data.user;
   };
 
+  const initEditor = async () => {
+    if (!contentInput || !window.tinymce) {
+      return;
+    }
+
+    try {
+      const editors = await window.tinymce.init({
+        selector: '#content_html',
+        license_key: 'gpl',
+        height: 420,
+        menubar: false,
+        promotion: false,
+        branding: false,
+        convert_urls: false,
+        object_resizing: 'img',
+        plugins: 'autolink lists link image media table code autoresize',
+        toolbar:
+          'undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist blockquote | link image media table | removeformat code',
+        images_file_types: 'jpg,jpeg,png,gif,webp',
+        image_title: true,
+        image_dimensions: true,
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        images_upload_handler: async (blobInfo, progress) => {
+          progress(10);
+          const imageUrl = await uploadImage(blobInfo.blob());
+          progress(100);
+          return imageUrl;
+        },
+        file_picker_callback: (callback, value, meta) => {
+          if (meta.filetype !== 'image') {
+            return;
+          }
+
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.accept = 'image/*';
+
+          input.addEventListener('change', async () => {
+            const file = input.files?.[0];
+
+            if (!file) {
+              return;
+            }
+
+            try {
+              const imageUrl = await uploadImage(file);
+              callback(imageUrl, { alt: file.name });
+            } catch (error) {
+              setStatus(error.message || 'Upload ảnh thất bại.', 'danger');
+            }
+          });
+
+          input.click();
+        },
+        content_style: `
+          body { font-family: Arial, sans-serif; font-size: 16px; line-height: 1.7; }
+          img { max-width: 100%; height: auto; }
+        `,
+      });
+
+      contentEditor = editors[0] || null;
+    } catch (error) {
+      setStatus(`Không thể tải TinyMCE: ${error.message}`, 'warning');
+    }
+  };
+
   if (titleInput && slugInput) {
     titleInput.addEventListener('input', () => {
-      if (!slugInput.value.trim()) {
+      if (!slugInput.dataset.touched) {
         slugInput.value = slugify(titleInput.value);
       }
+    });
+
+    slugInput.addEventListener('input', () => {
+      slugInput.dataset.touched = 'true';
+      slugInput.value = slugify(slugInput.value);
     });
   }
 
@@ -71,9 +150,9 @@ if (formRoot) {
       }
 
       const title = document.getElementById('title').value.trim();
-      const slug = document.getElementById('slug').value.trim() || slugify(title);
+      const slug = slugify(document.getElementById('slug').value.trim() || title);
       const summary = document.getElementById('summary').value.trim();
-      const content = document.getElementById('content_html').value.trim();
+      const content = (contentEditor?.getContent() || contentInput?.value || '').trim();
       const status = document.getElementById('status').value;
       const file = thumbnailInput?.files?.[0] || null;
 
@@ -87,7 +166,7 @@ if (formRoot) {
       }
 
       try {
-        setStatus('Đang tải ảnh và lưu bài viết...', 'info');
+        setStatus(file ? 'Đang tải ảnh và lưu bài viết...' : 'Đang lưu bài viết...', 'info');
 
         const imageUrl = await uploadImage(file);
 
@@ -117,4 +196,5 @@ if (formRoot) {
   }
 
   await ensureAdmin();
+  await initEditor();
 }
