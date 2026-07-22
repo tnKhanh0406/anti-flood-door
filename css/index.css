@@ -430,7 +430,7 @@ body {
 }
 
 .impact-section__title {
-  color: #111827;
+  color: var(--primary-dark);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   font-weight: 800;
   text-transform: uppercase;
@@ -548,7 +548,7 @@ body {
 }
 
 .solution-section__title {
-  color: #111827;
+  color: var(--primary-dark);
   font-size: clamp(1.4rem, 2.4vw, 2rem);
   font-weight: 800;
   text-transform: uppercase;
@@ -1659,11 +1659,27 @@ body {
 
   .install-process {
     grid-template-columns: 1fr;
+    gap: 1.35rem;
   }
 
   .install-step {
     min-height: auto;
     align-items: flex-start;
+  }
+
+  .install-step:nth-child(1)::after,
+  .install-step:nth-child(2)::after,
+  .install-step:nth-child(3)::after {
+    display: block;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -1rem;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid var(--primary-dark);
+    border-bottom: 0;
+    transform: translateX(-50%);
   }
 
   .install-step__icon {
@@ -1803,18 +1819,22 @@ body {
 
   .impact-section__title {
     font-size: 1.35rem;
+    color: var(--primary-dark);
   }
 
   .solution-section__title {
     font-size: 1.25rem;
+    color: var(--primary-dark);
   }
 
   .structure-section__title {
     font-size: 1.25rem;
+    color: var(--primary-dark);
   }
 
   .pricing-section__title {
     font-size: 1.25rem;
+    color: var(--primary-dark);
   }
 
   .pre-footer-section__cta {
