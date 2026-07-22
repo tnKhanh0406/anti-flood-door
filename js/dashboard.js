@@ -12,6 +12,15 @@ if (dashboardRoot) {
   const emptyState = document.getElementById('postsEmptyState');
   const refreshButton = document.getElementById('refreshPosts');
   const signOutButton = document.getElementById('signOutButton');
+  const searchForm = document.getElementById('postSearchForm');
+  const searchInput = document.getElementById('postSearchInput');
+  const clearSearchButton = document.getElementById('clearSearchButton');
+  const paginationRoot = document.getElementById('dashboardPagination');
+
+  const pageSize = 8;
+  let currentPage = 1;
+  let searchTerm = '';
+  let searchDebounce = null;
 
   const escapeHtml = (value = '') =>
     value
@@ -53,7 +62,7 @@ if (dashboardRoot) {
 
     const { data: profile, error: profileError } = await supabase
       .from('profiles')
-      .select('full_name, role')
+      .select('full_name, role, is_active')
       .eq('id', data.user.id)
       .maybeSingle();
 
@@ -62,7 +71,7 @@ if (dashboardRoot) {
       return data.user;
     }
 
-    if (!profile || profile.role !== 'admin') {
+    if (!profile || profile.role !== 'admin' || profile.is_active === false) {
       await supabase.auth.signOut();
       location.href = 'login.html';
       return null;
@@ -73,6 +82,58 @@ if (dashboardRoot) {
     }
 
     return data.user;
+  };
+
+  const getCount = async (builder) => {
+    const { count, error } = await builder.select('id', {
+      count: 'exact',
+      head: true,
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    return count || 0;
+  };
+
+  const loadStats = async () => {
+    try {
+      const [totalCount, publishedCount, draftCount, latestResult] = await Promise.all([
+        getCount(supabase.from('posts')),
+        getCount(supabase.from('posts').eq('status', 'published')),
+        getCount(supabase.from('posts').neq('status', 'published')),
+        supabase
+          .from('posts')
+          .select('updated_at, created_at')
+          .order('updated_at', { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+      ]);
+
+      if (latestResult.error) {
+        throw latestResult.error;
+      }
+
+      if (postCountEl) {
+        postCountEl.textContent = totalCount.toString();
+      }
+
+      if (publishedCountEl) {
+        publishedCountEl.textContent = publishedCount.toString();
+      }
+
+      if (draftCountEl) {
+        draftCountEl.textContent = draftCount.toString();
+      }
+
+      if (lastUpdatedEl) {
+        const latestPost = latestResult.data;
+        lastUpdatedEl.textContent = latestPost ? formatDate(latestPost.updated_at || latestPost.created_at) : '-';
+      }
+    } catch (error) {
+      console.warn('Không thể tải thống kê dashboard:', error);
+    }
   };
 
   const renderPosts = (posts) => {
@@ -108,6 +169,7 @@ if (dashboardRoot) {
       .join('');
 
     if (emptyState) {
+      emptyState.textContent = searchTerm ? 'Không tìm thấy bài viết phù hợp.' : 'Chưa có bài viết nào.';
       emptyState.hidden = posts.length > 0;
     }
 
@@ -125,46 +187,154 @@ if (dashboardRoot) {
         }
 
         await loadPosts();
+        await loadStats();
       });
     });
   };
 
-  const loadPosts = async () => {
-    const { data, error } = await supabase
+  const getPaginationPages = (totalPages) => {
+    const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+
+    return [...pages]
+      .filter((page) => page >= 1 && page <= totalPages)
+      .sort((a, b) => a - b);
+  };
+
+  const renderPagination = (totalCount) => {
+    if (!paginationRoot) {
+      return;
+    }
+
+    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+
+    if (totalCount <= pageSize) {
+      paginationRoot.innerHTML = totalCount
+        ? `<p class="text-muted small mb-0">Hiển thị ${totalCount} bài viết${searchTerm ? ' phù hợp' : ''}.</p>`
+        : '';
+      return;
+    }
+
+    const pages = getPaginationPages(totalPages);
+    let previousPage = 0;
+    const pageItems = pages
+      .map((page) => {
+        const gap = previousPage && page - previousPage > 1
+          ? '<li class="page-item disabled"><span class="page-link">...</span></li>'
+          : '';
+        previousPage = page;
+
+        return `
+          ${gap}
+          <li class="page-item ${page === currentPage ? 'active' : ''}">
+            <button class="page-link" type="button" data-page="${page}" ${page === currentPage ? 'aria-current="page"' : ''}>${page}</button>
+          </li>
+        `;
+      })
+      .join('');
+
+    paginationRoot.innerHTML = `
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <p class="text-muted small mb-0">Tổng ${totalCount} bài viết${searchTerm ? ' phù hợp' : ''}, trang ${currentPage}/${totalPages}</p>
+        <ul class="pagination mb-0">
+          <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <button class="page-link" type="button" data-page="${Math.max(1, currentPage - 1)}">Trước</button>
+          </li>
+          ${pageItems}
+          <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <button class="page-link" type="button" data-page="${Math.min(totalPages, currentPage + 1)}">Sau</button>
+          </li>
+        </ul>
+      </div>
+    `;
+
+    paginationRoot.querySelectorAll('[data-page]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const page = Number.parseInt(button.getAttribute('data-page') || '1', 10);
+        if (page === currentPage) {
+          return;
+        }
+
+        currentPage = page;
+        await loadPosts();
+      });
+    });
+  };
+
+  const buildListQuery = () => {
+    let query = supabase
       .from('posts')
-      .select('id, title, slug, status, thumbnail_url, created_at, updated_at')
+      .select('id, title, slug, status, thumbnail_url, created_at, updated_at', {
+        count: 'exact',
+      })
       .order('created_at', { ascending: false });
+
+    if (searchTerm) {
+      query = query.ilike('title', `%${searchTerm}%`);
+    }
+
+    return query;
+  };
+
+  async function loadPosts() {
+    const from = (currentPage - 1) * pageSize;
+    const to = from + pageSize - 1;
+    const { data, error, count } = await buildListQuery().range(from, to);
 
     if (error) {
       setStatus(error.message, 'danger');
       return;
     }
 
-    const posts = data || [];
-    const publishedPosts = posts.filter((post) => post.status === 'published');
-    const draftPosts = posts.filter((post) => post.status !== 'published');
+    const totalCount = count || 0;
+    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
-    if (postCountEl) {
-      postCountEl.textContent = posts.length.toString();
+    if (currentPage > totalPages && totalCount > 0) {
+      currentPage = totalPages;
+      await loadPosts();
+      return;
     }
 
-    if (publishedCountEl) {
-      publishedCountEl.textContent = publishedPosts.length.toString();
-    }
+    renderPosts(data || []);
+    renderPagination(totalCount);
+  }
 
-    if (draftCountEl) {
-      draftCountEl.textContent = draftPosts.length.toString();
-    }
-
-    if (lastUpdatedEl) {
-      lastUpdatedEl.textContent = posts.length ? formatDate(posts[0].updated_at || posts[0].created_at) : '-';
-    }
-
-    renderPosts(posts);
+  const runSearch = async () => {
+    searchTerm = searchInput?.value.trim() || '';
+    currentPage = 1;
+    await loadPosts();
   };
 
   if (refreshButton) {
-    refreshButton.addEventListener('click', loadPosts);
+    refreshButton.addEventListener('click', async () => {
+      await loadPosts();
+      await loadStats();
+    });
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      await runSearch();
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      window.clearTimeout(searchDebounce);
+      searchDebounce = window.setTimeout(runSearch, 350);
+    });
+  }
+
+  if (clearSearchButton) {
+    clearSearchButton.addEventListener('click', async () => {
+      if (searchInput) {
+        searchInput.value = '';
+      }
+
+      searchTerm = '';
+      currentPage = 1;
+      await loadPosts();
+    });
   }
 
   if (signOutButton) {
@@ -174,6 +344,9 @@ if (dashboardRoot) {
     });
   }
 
-  await requireAdmin();
-  await loadPosts();
+  const user = await requireAdmin();
+  if (user) {
+    await loadPosts();
+    await loadStats();
+  }
 }

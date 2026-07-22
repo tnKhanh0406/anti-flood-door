@@ -59,9 +59,26 @@
     </div>
 
     <div class="card shadow-sm">
-      <div class="card-header bg-white d-flex justify-content-between align-items-center">
-        <h2 class="h5 mb-0">Danh sách bài viết</h2>
-        <a class="small text-decoration-none" href="../posts.html" target="_blank" rel="noreferrer">Xem trang public</a>
+      <div class="card-header bg-white">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center">
+          <h2 class="h5 mb-0">Danh sách bài viết</h2>
+          <a class="small text-decoration-none" href="../posts.html" target="_blank" rel="noreferrer">Xem trang public</a>
+        </div>
+        <form class="row g-2 align-items-center mt-3" id="postSearchForm">
+          <div class="col-12 col-lg">
+            <label class="visually-hidden" for="postSearchInput">Tìm theo tiêu đề</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input class="form-control" id="postSearchInput" type="search" placeholder="Tìm bài viết theo tiêu đề...">
+            </div>
+          </div>
+          <div class="col-6 col-lg-auto">
+            <button class="btn btn-outline-primary w-100" type="submit">Tìm kiếm</button>
+          </div>
+          <div class="col-6 col-lg-auto">
+            <button class="btn btn-outline-secondary w-100" id="clearSearchButton" type="button">Xóa lọc</button>
+          </div>
+        </form>
       </div>
       <div class="table-responsive">
         <table class="table align-middle mb-0">
@@ -79,6 +96,7 @@
         </table>
       </div>
       <div class="p-4 text-center text-muted" id="postsEmptyState" hidden>Chưa có bài viết nào.</div>
+      <div class="card-footer bg-white" id="dashboardPagination"></div>
     </div>
   </main>
 
