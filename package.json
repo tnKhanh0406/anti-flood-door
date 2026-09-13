@@ -1,0 +1,14 @@
+{
+  "name": "anti-flood-door",
+  "version": "1.0.0",
+  "description": "Anti-flood door website - Cửa chống ngập NGUYÊN PHÚ",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": ["anti-flood", "door", "website"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
