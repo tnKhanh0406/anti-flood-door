@@ -5,10 +5,15 @@
   "scripts": {
     "test": "echo \"No tests specified\""
   },
-  "keywords": ["anti-flood", "door", "website"],
+  "keywords": [
+    "anti-flood",
+    "door",
+    "website"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vercel/analytics": "^1.4.1"
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^2.0.0"
   }
 }
