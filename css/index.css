@@ -977,6 +977,98 @@ body {
   line-height: 1.3;
 }
 
+.partners-section {
+  padding: 2.25rem 0 1.75rem;
+  overflow: hidden;
+}
+
+.partners-section__title {
+  margin: 0 0 0.45rem;
+  color: var(--primary-dark);
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.partners-section__subtitle {
+  margin: 0 auto 1.4rem;
+  color: #64758b;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.partners-marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+
+.partners-track {
+  display: flex;
+  width: max-content;
+  animation: partners-scroll 48s linear infinite;
+}
+
+.partners-group {
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.partner-logo {
+  width: 174px;
+  height: 122px;
+  flex: 0 0 174px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border: 1px solid #e1e9f1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--primary-dark);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.partner-logo img {
+  display: block;
+  width: 150px;
+  height: 102px;
+  object-fit: contain;
+}
+
+.partners-controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.partners-toggle {
+  border: 1px solid #ccdced;
+  border-radius: 20px;
+  padding: 0.4rem 0.95rem;
+  background: #ffffff;
+  color: #416184;
+  font-size: 0.82rem;
+}
+
+.partners-section.is-paused .partners-track,
+.partners-marquee:hover .partners-track,
+.partners-marquee:focus-within .partners-track {
+  animation-play-state: paused;
+}
+
+@keyframes partners-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .pricing-faq__title {
   color: var(--primary-dark);
   font-size: clamp(1.3rem, 2vw, 1.75rem);
@@ -2066,6 +2158,33 @@ body {
 
   .reason-card p {
     font-size: 0.72rem;
+  }
+
+  .partners-section {
+    padding-top: 1.75rem;
+  }
+
+  .partner-logo {
+    width: 144px;
+    height: 108px;
+    flex-basis: 144px;
+    font-size: 0.86rem;
+  }
+
+  .partner-logo img {
+    width: 128px;
+    height: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partners-track {
+    animation: none;
+  }
+
+  .partners-marquee {
+    overflow-x: auto;
+    mask-image: none;
   }
 }
 
