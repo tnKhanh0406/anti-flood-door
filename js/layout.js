@@ -36,11 +36,11 @@
               <li class="nav-item"><a class="nav-link text-dark ${currentPage === 'contact' ? 'active' : ''}" href="${contactHref}">Liên hệ</a></li>
             </ul>
 
-            <a class="header-hotline ms-lg-3" href="tel:0948723379" aria-label="Gọi hotline tư vấn 24/7 0948 723 379">
+            <a class="header-hotline ms-lg-3" href="tel:0343947666" aria-label="Gọi hotline tư vấn 24/7 0343 947 666">
               <span class="header-hotline__icon"><i class="bi bi-telephone-fill"></i></span>
               <span class="header-hotline__content">
                 <span class="header-hotline__label">Hotline tư vấn 24/7</span>
-                <span class="header-hotline__number">0948 723 379</span>
+                <span class="header-hotline__number">0343 947 666</span>
               </span>
             </a>
           </div>
@@ -72,8 +72,8 @@
   if (!document.querySelector('.floating-socials')) {
     document.body.insertAdjacentHTML('beforeend', `
       <div class="floating-socials" aria-label="Kết nối nhanh">
-        <a class="floating-socials__item floating-socials__item--zalo" href="https://zalo.me/0948723379" aria-label="Zalo">Zalo</a>
-        <a class="floating-socials__item" href="https://www.facebook.com/profile.php?id=61582512945913" aria-label="Facebook">
+        <a class="floating-socials__item floating-socials__item--zalo" href="https://zalo.me/0343947666" aria-label="Zalo">Zalo</a>
+        <a class="floating-socials__item" href="https://www.facebook.com/profile.php?id=61576714239882" aria-label="Facebook">
           <i class="bi bi-facebook"></i>
         </a>
         <a class="floating-socials__item" href="https://www.tiktok.com/@chongngapnguyenphu1" aria-label="TikTok">
@@ -120,18 +120,19 @@
             <div class="col-12 col-lg-2">
               <h4 class="pre-footer-section__title">Liên hệ</h4>
               <ul class="pre-footer-section__list list-unstyled mb-0">
-                <li><a href="tel:0948723379">Hotline: 0948 723 379</a></li>
+                <li><a href="tel:0343947666">Hotline Hà Nội: 0343 947 666</a></li>
+                <li><a href="tel:0343947666">Hotline TP.HCM: 0855 294 999</a></li>
                 <li><a href="mailto:chongngapnguyenphu@gmail.com">Email: chongngapnguyenphu@gmail.com</a></li>
-                <li><a href="${footerContactHref}">Địa chỉ: 123 Đường ABC, P. An Phú, TP. Thủ Đức, TP.HCM</a></li>
+                <li><a href="${footerContactHref}">TP.HCM: D65 Dragon Village 990 Nguyễn Duy Trinh. Quận 9</a></li>
+                <li><a href="${footerContactHref}">Hà Nội: 8NV2 Tân Triều, Thanh Trì, Hà Nội</a></li>
               </ul>
             </div>
 
             <div class="col-12 col-lg-2">
               <h4 class="pre-footer-section__title">Kết nối với chúng tôi</h4>
               <div class="pre-footer-section__socials">
-                <a href="https://www.facebook.com/profile.php?id=61582512945913" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="https://zalo.me/0948723379" aria-label="Zalo">Zalo</a>
-                <a href="https://www.youtube.com/" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61576714239882" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://zalo.me/0343947666" aria-label="Zalo">Zalo</a>
                 <a href="https://www.tiktok.com/@chongngapnguyenphu1" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
               </div>
             </div>
