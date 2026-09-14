@@ -12,11 +12,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="icon" type="image/png" href="./assets/images/logo.png">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MHZT2LC29N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-MHZT2LC29N');
+  </script>
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/js/analytics.js"></script>
 </head>
 <body class="bg-white text-dark" data-page="contact">
   <div class="page-shell">
@@ -131,6 +144,13 @@
         },
         body: searchParams.toString()
       });
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'contact_form_submit', {
+          form_name: 'contact_form',
+          page_path: window.location.pathname
+        });
+      }
 
       // Vì dùng no-cors nên không đọc response.json(), mặc định request thành công nếu không bị catch lỗi mạng
       alert("Gửi thành công!");
