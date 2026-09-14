@@ -122,7 +122,7 @@
               <ul class="pre-footer-section__list list-unstyled mb-0">
                 <li><a href="tel:0343947666">Hotline Hà Nội: 0343 947 666</a></li>
                 <li><a href="tel:0343947666">Hotline TP.HCM: 0855 294 999</a></li>
-                <li><a href="mailto:chongngapnguyenphu@gmail.com">Email: chongngapnguyenphu@gmail.com</a></li>
+                <li><a href="mailto:nguyenphutechco@gmail.com">Email: nguyenphutechco@gmail.com</a></li>
                 <li><a href="${footerContactHref}">TP.HCM: D65 Dragon Village 990 Nguyễn Duy Trinh. Quận 9</a></li>
                 <li><a href="${footerContactHref}">Hà Nội: 8NV2 Tân Triều, Thanh Trì, Hà Nội</a></li>
               </ul>
