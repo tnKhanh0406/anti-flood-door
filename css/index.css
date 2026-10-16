@@ -241,7 +241,7 @@ body {
   position: relative;
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.72) 38%, rgba(255, 255, 255, 0.14) 58%, rgba(255, 255, 255, 0) 100%),
-    url('../assets/images/hero.png') center center / cover no-repeat;
+    url('../assets/images/anhbia.png') center center / cover no-repeat;
 }
 
 .hero-section .row {
@@ -1608,13 +1608,13 @@ body {
 
 .solution-detail__image {
   display: block;
-  max-height: 360px;
+  max-height: 600px;
   object-fit: contain;
 }
 
 .solution-detail--usage .solution-detail__image {
   width: 100%;
-  height: 430px;
+  height: 700px;
   max-height: none;
   object-fit: cover;
 }
@@ -1688,7 +1688,8 @@ body {
 .solution-feature-row__image {
   display: block;
   width: 100%;
-  height: 260px;
+  aspect-ratio: 6 / 9;
+  height: 370px;
   object-fit: cover;
 }
 
@@ -1794,13 +1795,13 @@ body {
   }
 
   .solution-detail--usage .solution-detail__image {
-    height: 360px;
+    height: 750px;
   }
 }
 
 @media (max-width: 575.98px) {
   .solution-detail--usage .solution-detail__image {
-    height: 280px;
+    height: 350px;
   }
 
   .solution-detail__item h4 {
@@ -2240,7 +2241,7 @@ body {
   .hero-section {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.42) 48%, rgba(255, 255, 255, 0.08) 100%),
-      url('../assets/images/hero.png') center center / cover no-repeat;
+      url('../assets/images/anhbia.png') center center / cover no-repeat;
   }
 
   .hero-checklist {
